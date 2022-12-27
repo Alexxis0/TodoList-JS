@@ -32,10 +32,10 @@ function deleteCorbeille(e) {
 
 
 function checkedCircle(e) {
-    if (e.target.parentElement.children[0].src && "http://127.0.0.1:5500/assets/unchecked_circle.svg") {
+    if (e.target.parentElement.children[0].src == "http://127.0.0.1:5500/assets/unchecked_circle.svg") {
         e.target.src = `${"./assets/check_circle.svg"}`;
         console.log("if");
-    } else if(e.target.parentElement.children[0].src && "http://127.0.0.1:5500/assets/check_circle.svg") {
+    } else if(e.target.parentElement.children[0].src == "http://127.0.0.1:5500/assets/check_circle.svg") {
         e.target.src = `${"./assets/unchecked_circle.svg"}`;
         console.log("else if");
     }
