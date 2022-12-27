@@ -1,42 +1,43 @@
 let input = document.querySelector(".header_input");
+let form = document.querySelector("form");
 let setInputValue = "";
 let listTodo = document.querySelector(".list");
-let listItem = document.createElement('ul');
+let listItem = document.createElement("ul");
 let imgAdd = document.querySelector(".header_btn_add");
 let imgCircleChecked = `<img class="circle" src=${"./assets/check_circle.svg"}>`;
+let imgCircleUnchecked = `<img class="circle" src=${"./assets/unchecked_circle.svg"}>`;
 
-
-let imgCircleUnchecked = `<img class="circle" src=${"./assets/unchecked_circle.svg"} onclick="checkedCircle()">`;
-let imgDelete = `<img id="${setInputValue}" class="item_delete" src=${"./assets/delete.svg"} onclick="deleteCorb()">`;
 
 input.addEventListener("input", (e) => (setInputValue = e.target.value));
-input.addEventListener("keydown", addKeyDown);
-imgAdd.addEventListener("click", listImgAdd);
+form.addEventListener("submit", addList);
+imgAdd.addEventListener("click", addList);
+listItem.addEventListener("click", deleteCorbeille);
+listItem.addEventListener("click", checkedCircle);
 
-
-function addKeyDown(e) {
-    if (e.key == "Enter" && setInputValue != "") {
-        listItem.innerHTML += `<li id="${setInputValue}">${imgCircleUnchecked}${setInputValue}${imgDelete}</li>`;
-        listTodo.appendChild(listItem);
-        imgDelete
-        console.log(imgDelete);
-        input.value = "";
-
-    }
-}
-function listImgAdd() {
+function addList(e) {
+    e.preventDefault();
     if (setInputValue != "") {
+        let imgDelete = `<img id="${setInputValue}_delete" class="item_delete" src=${"./assets/delete.svg"}>`;
         listItem.innerHTML += `<li id="${setInputValue}">${imgCircleUnchecked}${setInputValue}${imgDelete}</li>`;
         listTodo.appendChild(listItem);
         input.value = "";
-
     }
 }
-function checkedCircle() {
-    listItem.innerHTML = `<li id="${setInputValue}">${imgCircleChecked}${setInputValue}${imgDelete}</li>`;
-    listTodo.appendChild(listItem)
-}
-function deleteCorb() {
-console.log(imgDelete);
 
+function deleteCorbeille(e) {
+    if (e.target.src == "http://127.0.0.1:5500/assets/delete.svg") {
+        e.target.parentElement.remove("li");
+    }
+}
+
+
+function checkedCircle(e) {
+    if (e.target.parentElement.children[0].src && "http://127.0.0.1:5500/assets/unchecked_circle.svg") {
+        e.target.src = `${"./assets/check_circle.svg"}`;
+        console.log("if");
+    } else if(e.target.parentElement.children[0].src && "http://127.0.0.1:5500/assets/check_circle.svg") {
+        e.target.src = `${"./assets/unchecked_circle.svg"}`;
+        console.log("else if");
+    }
+    console.log(e.target.parentElement.children[0].src);
 }
