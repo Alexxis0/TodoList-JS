@@ -4,8 +4,8 @@ let setInputValue = "";
 let listTodo = document.querySelector(".list");
 let listItem = document.createElement("ul");
 let imgAdd = document.querySelector(".header_btn_add");
-let imgCircleChecked = `<img class="circle" src=${"./assets/check_circle.svg"}>`;
-let imgCircleUnchecked = `<img class="circle" src=${"./assets/unchecked_circle.svg"}>`;
+let imgCircleChecked = `<img id=${"check_circle"} class="circle" src=${"./assets/check_circle.svg"}>`;
+let imgCircleUnchecked = `<img id=${"uncheck_circle"} class="circle" src=${"./assets/unchecked_circle.svg"}>`;
 
 
 input.addEventListener("input", (e) => (setInputValue = e.target.value));
@@ -25,19 +25,19 @@ function addList(e) {
 }
 
 function deleteCorbeille(e) {
-    if (e.target.src == "http://127.0.0.1:5500/assets/delete.svg") {
+    if (e.target.className == "item_delete") {
         e.target.parentElement.remove("li");
     }
 }
 
 
 function checkedCircle(e) {
-    if (e.target.parentElement.children[0].src == "http://127.0.0.1:5500/assets/unchecked_circle.svg") {
+    if (e.target.parentElement.children[0].id == "uncheck_circle") {
         e.target.src = `${"./assets/check_circle.svg"}`;
-        console.log("if");
-    } else if(e.target.parentElement.children[0].src == "http://127.0.0.1:5500/assets/check_circle.svg") {
+        e.target.id = `${"check_circle"}`;
+
+    } else if(e.target.parentElement.children[0].id == "check_circle") {
         e.target.src = `${"./assets/unchecked_circle.svg"}`;
-        console.log("else if");
+        e.target.id = `${"uncheck_circle"}`;
     }
-    console.log(e.target.parentElement.children[0].src);
 }
